@@ -1,10 +1,9 @@
 version: '3'
 services:
   app:
-    build:.
-    # Montamos el directorio actual (.) en /usr/src/app dentro del contenedor
-    # Esto permite editar código en VS Code y verlo reflejado en la app
+    build:. 
     volumes:
+      # Monta tu código actual dentro de la carpeta creada en el Dockerfile
       -.:/usr/src/app
     ports:
       - "3000:3000"
@@ -12,10 +11,13 @@ services:
       - mongo
     environment:
       - MONGO_URI=mongodb://mongo:27017/taller_db
-    # Usamos nodemon o node directo. El comando se sobreescribe para mantener el contenedor vivo
+    # Mantiene el contenedor vivo para que Codespaces se pueda conectar
     command: /bin/sh -c "while sleep 1000; do :; done"
 
   mongo:
     image: mongo:4.4
-    ports:
-      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
