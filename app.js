@@ -8,9 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Conexión a MongoDB (Simulada para el taller o conectar a instancia real)
-mongoose.connect(process.env.MONGO_URI |
-
-| 'mongodb://localhost:27017/taller_db', {
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/taller_db', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
