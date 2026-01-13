@@ -1,0 +1,17 @@
+{
+  "name": "Security Lab",
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+  "service": "app",
+  "workspaceFolder": "/usr/src/app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint" 
+      ]
+    }
+  },
+  "forwardPorts": ,
+  "postCreateCommand": "npm install && node seed.js"
+}
