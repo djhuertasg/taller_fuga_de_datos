@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 
 // Usar la variable de entorno o localhost como fallback
-const dbURI = process.env.MONGO_URI |
-
-| 'mongodb://localhost:27017/taller_db';
+const dbURI = process.env.MONGO_URI || 'mongodb://localhost:27017/taller_db';
 
 const UserSchema = new mongoose.Schema({
     username: String,
