@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
     username: String,
     password: String, // Texto plano para el taller (vulnerabilidad didáctica)
     role: { type: String, default: 'patient' },
-    medicalHistory: { type: Array, default: }
+    medicalHistory: { type: Array, default: ''}
 });
 
 const User = mongoose.model('User', UserSchema);
