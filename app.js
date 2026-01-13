@@ -47,9 +47,7 @@ app.put('/api/user/settings', (req, res) => {
 // Endpoint de verificación de privilegios (Gadget)
 app.get('/api/admin', (req, res) => {
     // Si el prototipo fue contaminado, req.user (o un objeto vacío) tendrá isAdmin: true
-    const currentUser = req.user |
-
-| {}; 
+    const currentUser = req.user || {}; 
     if (currentUser.isAdmin) {
         res.json({ message: "ACCESO CONCEDIDO: Datos sensibles..." });
     } else {
