@@ -1,29 +1,31 @@
-// seed.js
 const mongoose = require('mongoose');
 
-// Conexión a la base de datos (usa la variable de entorno o localhost)
+// Usar la variable de entorno o localhost como fallback
 const dbURI = process.env.MONGO_URI |
 
 | 'mongodb://localhost:27017/taller_db';
 
 const UserSchema = new mongoose.Schema({
     username: String,
-    password: String, // En un caso real, esto estaría hasheado. Aquí es texto plano para el taller.
+    password: String, // Texto plano para el taller (vulnerabilidad didáctica)
     role: { type: String, default: 'patient' },
-    // Campos extra para simular datos médicos
     medicalHistory: { type: Array, default: }
 });
 
 const User = mongoose.model('User', UserSchema);
 
-// Datos semilla
-const users =
+const seedUsers = [
+    {
+        username: "admin",
+        password: "SuperSecretPassword123",
+        role: "admin",
+        medicalHistory: []
     },
     {
         username: "dr.smith",
-        password: "MedicalPassword123", // Objetivo de la Inyección NoSQL
+        password: "MedicalPassword123", 
         role: "doctor",
-        medicalHistory:
+        medicalHistory: []
     },
     {
         username: "patient_zero",
@@ -33,21 +35,25 @@ const users =
     }
 ];
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-   .then(async () => {
-        console.log('🌱 Conectado a MongoDB...');
+const seedDB = async () => {
+    try {
+        await mongoose.connect(dbURI, { 
+            useNewUrlParser: true, 
+            useUnifiedTopology: true 
+        });
+        console.log("🌱 Conectado a MongoDB...");
         
-        // Limpiar base de datos previa
-        await User.deleteMany({});
-        console.log('🧹 Usuarios antiguos eliminados.');
+        await User.deleteMany({}); 
+        console.log("🧹 Base de datos limpia.");
 
-        // Insertar nuevos usuarios
-        await User.insertMany(users);
-        console.log('✅ Base de datos poblada: Admin, Dr. Smith y Paciente creados.');
+        await User.insertMany(seedUsers);
+        console.log("✅ Usuarios creados: Admin, Doctor y Paciente.");
         
         process.exit(0);
-    })
-   .catch(err => {
-        console.error('❌ Error:', err);
+    } catch (err) {
+        console.error("❌ Error en el seeding:", err);
         process.exit(1);
-    });
+    }
+};
+
+seedDB();
