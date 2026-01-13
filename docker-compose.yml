@@ -1,9 +1,8 @@
 version: '3'
 services:
   app:
-    build:. 
+    build:.
     volumes:
-      # Monta tu código actual dentro de la carpeta creada en el Dockerfile
       -.:/usr/src/app
     ports:
       - "3000:3000"
@@ -11,7 +10,7 @@ services:
       - mongo
     environment:
       - MONGO_URI=mongodb://mongo:27017/taller_db
-    # Mantiene el contenedor vivo para que Codespaces se pueda conectar
+    # Mantiene el contenedor encendido para que Codespaces se pueda conectar
     command: /bin/sh -c "while sleep 1000; do :; done"
 
   mongo:
