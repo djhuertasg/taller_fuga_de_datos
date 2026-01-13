@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
     res.send(`
         <div style="font-family: sans-serif; max-width: 600px; margin: 50px auto;">
             <h1>Taller de fuga de datos</h1>
-            <p style="color: green; font-weight: bold;">El sistema está en línea.</p>
+            <p style="color: green; font-weight: bold;">Este taller práctico permite explorar prácticas de desarrollo seguro</p>
             <hr>
             <h3>🎯 Objetivos del Taller:</h3>
             <ul>
